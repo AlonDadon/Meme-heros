@@ -177,7 +177,9 @@ body.menu-open .link-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 4px 4px;
 }
-
+.grid-container img{
+    cursor: pointer;
+}
 /* helper layout */
 
 .container {

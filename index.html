@@ -101,12 +101,21 @@
 
 
     <main class="container">
-        <section class="grid-container ">gallery
+        <section class="grid-container hidden">gallery
         </section>
+
         <section class="user-controller">
-            <label>Text
-                <input oninput="onAddTxt(this.value)" type="text">
+            <label>Font size: <span class="font-size"></span>
+                <input name="fontSize" onchange="onUpdateFontSize(this.value)" type="range" min="16" max="50"
+                    value="22">
             </label>
+            <label>Text
+                <input name="addTxt" oninput="onAddTxt(this.value)" type="text">
+            </label>
+            <button onclick="onMoveLine(-1)">up</button>
+            <button onclick="onMoveLine(1)">down</button>
+            <button onclick="onAddLine()">Add text line</button>
+            <button onclick="onSwitchLine()">Switch line</button>
         </section>
 
         <section class="canvas-container">
@@ -120,10 +129,9 @@
         <ul class="social-media-nav">
             <li><a href="">FaceBook</a></li>
             <li><a href="">LinkDin</a></li>
-            <li><a href="">WatsApp</a></li>
+            <li><a href="">Whatsapp</a></li>
         </ul>
     </footer>
-
 
 
     <script src="js/util-service.js"></script>

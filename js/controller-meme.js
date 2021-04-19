@@ -8,44 +8,47 @@ function onInit() {
     renderGallery(imgs)
     gElCanvas = document.querySelector('#canvas')
     gCtx = gElCanvas.getContext('2d')
+    resizeCanvas()
+    renderFontSize(getEl('[name="fontSize"]').value)
+}
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = elContainer.offsetHeight
 }
 
 function renderGallery(imgs) {
     var strHtml = imgs.map(function (img) {
         return `  
-             <img data-id="${img.id}" onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
+        <img data-id="${img.id}" onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
     })
     getEl('.grid-container').innerHTML = strHtml.join('')
 }
 
-function onAddTxt(txt) {
-    addTxt(txt)
-    renderCanvas()
-}
-
-function drawText(text, x, y) {
+function renderCanvas() {
     let meme = getMeme()
-    if (!meme.lines.txt) meme.lines.txt = 'Add text'
+    let idx = meme.selectedLineIdx
+    getEl('[name="addTxt"]').value = meme.lines[idx].txt
+    const img = new Image()
+    img.src = `img/${meme.selectedImgId}.jpg`;
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+        meme.lines.forEach(function (line) {
+            drawTxt(line.txt, line.pos, line.size)
+        })
+    }
+}
+function drawTxt(txt, pos, fontSize) {
     gCtx.beginPath();
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'red'
     gCtx.fillStyle = 'white'
-    gCtx.font = '40px IMPACT'
+    console.log();
+    gCtx.font = `${fontSize}px IMPACT`
     gCtx.textAlign = 'center'
-    // todo add dynmic txt
-    gCtx.fillText(meme.lines.txt, 100, 50, gElCanvas.width)
-    gCtx.strokeText(meme.lines.txt, 100, 50, gElCanvas.width)
+    gCtx.fillText(txt, pos.x, pos.y, gElCanvas.width)
+    gCtx.strokeText(txt, pos.x, pos.y, gElCanvas.width)
     // syntax gCtx.fillText(txt, x, y,canvasWidth)
-}
-
-function renderCanvas() {
-    let currImg = getMeme()
-    const img = new Image()
-    img.src = `img/${currImg.selectedImgId}.jpg`;
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-        drawText();
-    }
 }
 
 function onUpdateImg(elImg) {
@@ -53,8 +56,35 @@ function onUpdateImg(elImg) {
     renderCanvas()
 }
 
-function toggleMenu() {
-    document.body.classList.toggle('menu-open')
+function onAddTxt(txt) {
+    addTxt(txt)
+    renderCanvas()
+}
+function onUpdateFontSize(fontSize) {
+    updateFontSize(fontSize)
+    renderFontSize(fontSize)
+    renderCanvas()
+}
+function renderFontSize(fontSize) {
+    getEl('.font-size').innerText = fontSize
+}
+function onMoveLine(diff) {
+    updateLinePos(diff)
+    renderCanvas()
+}
+
+function onAddLine() {
+    createLine()
+    switchLine()
+    renderCanvas()
+}
+function onSwitchLine() {
+    switchLine()
+    renderCanvas()
 }
 
 
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
