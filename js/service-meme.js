@@ -2,44 +2,90 @@
 
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
 var gMeme = {
+    canvasSize: {
+        width: 0,
+        height: 0,
+    },
+    spaceBetweenLine: 40,
     selectedImgId: 5,
     selectedLineIdx: 0,
-    lines: [
-        {
-            txt: 'I never eat Falafel',
-            size: 22,
-            align: 'left',
-            color: 'red',
-            pos: {
-                x: 105,
-                y: 50
-            }
-        }
-    ]
+    lines: [],
+    fontFamily: 'Impact',
+    clickDistance: 8.5,
 }
 var gImgs = []
 createImgs(18)
 
-function switchLine() {
-    gMeme.selectedLineIdx++
-    if (gMeme.selectedLineIdx >= gMeme.lines.length) {
-        gMeme.selectedLineIdx = 0
-    }
+function removeLine() {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines.splice(idx, 1)
+    gMeme.selectedLineIdx = 0
+}
 
+function updateTxtAlign(txtAlign) {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].txtAlign = txtAlign
+}
+
+function updateFontFamily(fontFamily) {
+    gMeme.fontFamily = fontFamily
+}
+
+function updateStroke(color) {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].strokeColor = color
+}
+
+function updateCanvasSize(width, height) {
+    gMeme.canvasSize.width = width
+    gMeme.canvasSize.height = height
+    gMeme.lines.forEach(line => {
+        line.pos.x = width / 2
+    })
+}
+
+function switchLine(idx) {
+    if (!idx) {
+        gMeme.selectedLineIdx++
+        if (gMeme.selectedLineIdx >= gMeme.lines.length) {
+            gMeme.selectedLineIdx = 0
+        }
+    } else gMeme.selectedLineIdx = idx
 }
 
 function createLine() {
+
     let line = {
         txt: 'Add text',
-        size: 22,
+        size: 33,
         align: 'left',
-        color: 'red',
+        strokeColor: 'black',
         pos: {
-            x: 250,
-            y: 250
-        }
+            x: gMeme.canvasSize.width / 2,
+            y: getLinePosY()
+        },
+        txtAlign: 'center',
+        isDragging: false
     }
+    line.lineSize = line.txt.length * gMeme.clickDistance
     gMeme.lines.push(line)
+}
+function getLinePosY() {
+    const topLine = gMeme.lines.some(function (line) {
+        return (line.pos.y === 40)
+    })
+    if (topLine) {
+        var bottomLine = gMeme.lines.some(function (line) {
+            return (line.pos.y === gMeme.canvasSize.height - gMeme.spaceBetweenLine)
+        })
+    }
+
+    let posY
+    if (!topLine) posY = 40
+    else if (topLine && !bottomLine) {
+        posY = gMeme.canvasSize.height - gMeme.spaceBetweenLine
+    } else posY = gMeme.canvasSize.height / 2
+    return posY
 }
 
 function getImgs() {
@@ -48,7 +94,6 @@ function getImgs() {
 function getMeme() {
     return gMeme
 }
-
 function createImgs(size) {
     for (let i = 0; i < size; i++) {
         gImgs.push(createImg(i + 1))
@@ -66,9 +111,11 @@ function createImg(imgNum) {
 function addTxt(txt) {
     let idx = gMeme.selectedLineIdx
     gMeme.lines[idx].txt = txt
+    gMeme.lines[idx].lineSize = txt.length * gMeme.clickDistance
 }
 
 function updateImg(id) {
+    gUserImg = null
     gMeme.selectedImgId = id
 }
 
@@ -77,7 +124,36 @@ function updateFontSize(fontSize) {
     gMeme.lines[idx].size = fontSize
 }
 
-function updateLinePos(diff) {
+function updateLinePosY(diff) {
     let idx = gMeme.selectedLineIdx
     gMeme.lines[idx].pos.y += diff
 }
+function isLineClicked(clickedPos) {
+    return gMeme.lines.some(function (line) {
+        const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2)
+        return distance <= line.lineSize
+    })
+}
+
+function getLineIdxByPos(clickedPos) {
+    return gMeme.lines.findIndex(function (line) {
+        const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2)
+        return distance <= line.lineSize
+    })
+}
+
+function updateIsDragging(isDragging) {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].isDragging = isDragging
+}
+
+function updateLinePos(pos) {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].pos.y = pos.y
+    gMeme.lines[idx].pos.x = pos.x
+}
+
+
+
+
+

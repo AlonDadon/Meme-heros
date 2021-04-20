@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>Meme heros</title>
+    <link rel="shortcut icon" href="img/favIcon/logo/favicon-32x32.png" type="image/x-icon">
 </head>
 
 <body onload="onInit()">
@@ -62,35 +63,30 @@
         </div>
     </nav>
 
-    <header class="container">
-        <hr>
+    <header class="main-header container flex column">
+        <!-- <hr> -->
         <h1>Meme heros generator</h1>
-        <h2>Feel free to inspire to make your relatives happy or funny...
-            and most importantly you can do it easily with the help of the app</h2>
+        <!-- <h2>Feel free to inspire to make your relatives happy or funny...
+            and most importantly you can do it easily with the help of the app</h2> -->
+        <!-- <h2>Feel free to inspire to make your relatives happy or funny...</h2> -->
+        <h2>Create your own hero card</h2>
+        <h3>The most popular
+        </h3>
         <ul class="tag-container flex space-evenly">
             <li>
-                <a href="">funny</a>
+                <a href="">Funny</a>
             </li>
             <li>
-                <a href="">Motivation</a>
+                <a href="">Love</a>
             </li>
             <li>
-                <a href="">Smart</a>
+                <a href="">Action</a>
             </li>
             <li>
-                <a href="">Toons</a>
+                <a href="">Dark</a>
             </li>
             <li>
-                <a href="">New</a>
-            </li>
-            <li>
-                <a href="">Poplar in Israel now</a>
-            </li>
-            <li>
-                <a href="">The best choice for you</a>
-            </li>
-            <li>
-                <a href="">Recently viewed</a>
+                <a href="">Action</a>
             </li>
         </ul>
         <!-- <button>The most popular</button> -->
@@ -101,23 +97,46 @@
 
 
     <main class="container">
-        <section class="grid-container hidden">gallery
+        <section class="grid-container ">gallery
+       
         </section>
 
         <section class="user-controller">
             <label>Font size: <span class="font-size"></span>
-                <input name="fontSize" onchange="onUpdateFontSize(this.value)" type="range" min="16" max="50"
-                    value="22">
+                <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="50" value="22">
             </label>
             <label>Text
                 <input name="addTxt" oninput="onAddTxt(this.value)" type="text">
             </label>
+            <label>
+                <input oninput="onUpdateStroke(this.value)" type="color" name="" id="">
+            </label>
             <button onclick="onMoveLine(-1)">up</button>
             <button onclick="onMoveLine(1)">down</button>
             <button onclick="onAddLine()">Add text line</button>
+            <button onclick="onRemoveLine()">delete text line</button>
             <button onclick="onSwitchLine()">Switch line</button>
-        </section>
 
+            <button onclick="onUpdateTxtAlign('left')">L</button>
+            <button onclick="onUpdateTxtAlign('right')">R</button>
+            <button onclick="onUpdateTxtAlign('center')">C</button>
+
+            <select onchange="onUpdateFontFamily(this.value)">
+                <option value="rockSalt">Rock salt</option>
+                <option value="fantasy">fantasy</option>
+                <option value="cursive">cursive</option>
+                <option value="monospace">Monospace</option>
+            </select>
+
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)">
+            <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                <input name="img" id="imgData" type="hidden" />
+                <button class="btn" type="submit">Publish</button>
+                <a href="#" class="btn" onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
+                <div class="share-container"></div>
+            </form>
+
+        </section>
         <section class="canvas-container">
             <canvas id="canvas" width="400" height="400" style="outline:1px solid green"></canvas>
         </section>
@@ -135,6 +154,7 @@
 
 
     <script src="js/util-service.js"></script>
+    <script src="js/upload-service.js"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/service-meme.js"></script>
     <script src="js/controller-meme.js"></script>
