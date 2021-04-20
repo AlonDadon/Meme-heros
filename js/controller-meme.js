@@ -17,7 +17,7 @@ function onInit() {
 function renderGallery(imgs) {
     var strHtml = imgs.map(function (img) {
         return `  
-        <img data-id="${img.id}" onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
+        <img data-id="${img.id}" ontouchstart="onUpdateImg(this,event)" onclick="onUpdateImg(this,event)"  src="${img.src}" alt="">`
     })
     getEl('.grid-container').innerHTML = strHtml.join('')
 }
@@ -57,7 +57,9 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
     gCtx.strokeText(txt, pos.x, pos.y, gElCanvas.width)
 }
 
-function onUpdateImg(elImg) {
+function onUpdateImg(elImg,ev) {
+    ev.preventDefault()
+    console.log(elImg,ev);
     getEl('.grid-container').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
