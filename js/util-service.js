@@ -1,7 +1,5 @@
 'use strict'
 
-'use strict';
-
 function makeId(length = 6) {
     var txt = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -15,7 +13,6 @@ function makeId(length = 6) {
 function getEl(selector) {
     return document.querySelector(selector)
 }
-
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);

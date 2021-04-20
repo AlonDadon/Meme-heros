@@ -1,8 +1,8 @@
 'use strict'
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 var gElCanvas
 var gCtx
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
     let imgs = getImgs()
@@ -12,16 +12,6 @@ function onInit() {
     addListeners()
     createLine()
     renderFontSize(getEl('[name="fontSize"]').value)
-}
-
-function resizeCanvas() {
-    let meme = getMeme()
-    let img = new Image()
-    img.src = `img/${meme.selectedImgId}.jpg`;
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = (img.height * gElCanvas.width) / img.width
-    updateCanvasSize(gElCanvas.width, gElCanvas.height)
 }
 
 function renderGallery(imgs) {
@@ -48,7 +38,6 @@ function renderCanvas() {
             drawTxt(line.txt, line.pos, line.size, line.strokeColor, line.txtAlign, meme.fontFamily)
         })
     }
-
 }
 
 function renderUserController(txt, fontSize) {
@@ -69,8 +58,12 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
 }
 
 function onUpdateImg(elImg) {
+    getEl('.grid-container').classList.add('hidden')
+    getEl('header').classList.add('hidden')
+    getEl('.generator-container').classList.remove('hidden')
     updateImg(elImg.dataset.id)
     resizeCanvas()
+    createLine()
     renderCanvas()
 }
 
@@ -156,13 +149,6 @@ function addTouchListeners() {
     gElCanvas.addEventListener('touchend', onUp)
 }
 
-function isLineClicked(clickedPos) {
-    return gMeme.lines.some(function (line) {
-        const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2)
-        return distance <= line.lineSize
-    })
-}
-
 function onDown(ev) {
     const pos = getEvPos(ev)
     if (!isLineClicked(pos)) return
@@ -190,20 +176,4 @@ function onUp() {
 
 function onLeave() {
     document.body.style.cursor = 'auto'
-}
-
-function getEvPos(ev) {
-    var pos = {
-        x: ev.offsetX,
-        y: ev.offsetY
-    }
-    if (gTouchEvs.includes(ev.type)) {
-        ev.preventDefault()
-        ev = ev.changedTouches[0]
-        pos = {
-            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
-        }
-    }
-    return pos
 }

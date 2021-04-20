@@ -54,7 +54,6 @@ function switchLine(idx) {
 }
 
 function createLine() {
-
     let line = {
         txt: 'Add text',
         size: 33,
@@ -154,6 +153,27 @@ function updateLinePos(pos) {
 }
 
 
+function resizeCanvas() {
+    let img = new Image()
+    img.src = `img/${gMeme.selectedImgId}.jpg`;
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = (img.height * gElCanvas.width) / img.width
+    updateCanvasSize(gElCanvas.width, gElCanvas.height)
+}
 
-
-
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    if (gTouchEvs.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+        }
+    }
+    return pos
+}
