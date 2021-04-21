@@ -10,7 +10,7 @@ var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
     lines: [],
-    fontFamily: 'Impact',
+    fontFamily: 'rockSalt',
     clickDistance: 8.5,
 }
 var gImgs = []
