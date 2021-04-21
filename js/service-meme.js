@@ -1,5 +1,6 @@
 'use strict'
 
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
 var gMeme = {
     canvasSize: {
@@ -10,20 +11,19 @@ var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
     lines: [],
-    fontFamily: 'rockSalt',
-    clickDistance: 8.5,
+    fontFamily: 'rockSalt'
 }
 var gImgs = []
 createImgs(18)
 
 function removeLine() {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines.splice(idx, 1)
     gMeme.selectedLineIdx = 0
 }
 
 function updateTxtAlign(txtAlign) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].txtAlign = txtAlign
 }
 
@@ -32,8 +32,13 @@ function updateFontFamily(fontFamily) {
 }
 
 function updateStroke(color) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].strokeColor = color
+}
+
+function updateFill(color) {
+    const idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].fillColor = color
 }
 
 function updateCanvasSize(width, height) {
@@ -58,9 +63,10 @@ function switchLine(idx) {
 function createLine() {
     let line = {
         txt: 'Add text',
-        size: 33,
+        size: 50,
         align: 'left',
         strokeColor: 'black',
+        fillColor: 'white',
         pos: {
             x: gMeme.canvasSize.width / 2,
             y: getLinePosY()
@@ -68,15 +74,16 @@ function createLine() {
         txtAlign: 'center',
         isDragging: false
     }
-    line.lineSize = line.txt.length * gMeme.clickDistance
+    line.lineWidth = 250
     gMeme.lines.push(line)
 }
+
 function getLinePosY() {
-    const topLine = gMeme.lines.some(function (line) {
+    const topLine = gMeme.lines.some((line)=>{
         return (line.pos.y === 40)
     })
     if (topLine) {
-        var bottomLine = gMeme.lines.some(function (line) {
+        var bottomLine = gMeme.lines.some((line)=> {
             return (line.pos.y === gMeme.canvasSize.height - gMeme.spaceBetweenLine)
         })
     }
@@ -110,9 +117,8 @@ function createImg(imgNum) {
 }
 
 function addTxt(txt) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].txt = txt
-    gMeme.lines[idx].lineSize = txt.length * gMeme.clickDistance
 }
 
 function updateImg(id) {
@@ -121,19 +127,19 @@ function updateImg(id) {
 }
 
 function updateFontSize(fontSize) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].size = fontSize
 }
 
 function updateLinePosY(diff) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].pos.y += diff
 }
 function isLineClicked(clickedPos) {
     return gMeme.lines.some(function (line) {
         const distanceX = Math.abs(line.pos.x - clickedPos.x)
         const distanceY = Math.abs(line.pos.y - clickedPos.y)
-        return (distanceX <= line.lineSize && distanceY <= 20)
+        return (distanceX <= line.lineWidth && distanceY <= 20)
     })
 }
 
@@ -141,17 +147,17 @@ function getLineIdxByPos(clickedPos) {
     return gMeme.lines.findIndex(function (line) {
         const distanceX = Math.abs(line.pos.x - clickedPos.x)
         const distanceY = Math.abs(line.pos.y - clickedPos.y)
-        return (distanceX <= line.lineSize && distanceY <= 20)
+        return (distanceX <= line.lineWidth && distanceY <= 20)
     })
 }
 
 function updateIsDragging(isDragging) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].isDragging = isDragging
 }
 
 function updateLinePos(pos) {
-    let idx = gMeme.selectedLineIdx
+    const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].pos.y = pos.y
     gMeme.lines[idx].pos.x = pos.x
 }
@@ -171,7 +177,7 @@ function getEvPos(ev) {
         x: ev.offsetX,
         y: ev.offsetY
     }
-    if (gTouchEvs.includes(ev.type)) {
+    if (TOUCH_EVS.includes(ev.type)) {
         ev.preventDefault()
         ev = ev.changedTouches[0]
         pos = {
@@ -180,4 +186,13 @@ function getEvPos(ev) {
         }
     }
     return pos
+}
+
+function restMeme() {
+    gMeme.lines = []
+}
+
+function updateLineWidth(width) {
+    const idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].lineWidth = width;
 }

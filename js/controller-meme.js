@@ -1,8 +1,7 @@
 'use strict'
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
-var gElCanvas
-var gCtx
+let gElCanvas
+let gCtx
 
 function onInit() {
     let imgs = getImgs()
@@ -10,12 +9,11 @@ function onInit() {
     gElCanvas = document.querySelector('#canvas')
     gCtx = gElCanvas.getContext('2d')
     addListeners()
-
     renderFontSize(getEl('[name="fontSize"]').value)
 }
 
 function renderGallery(imgs) {
-    var strHtml = imgs.map(function (img) {
+    const strHtml = imgs.map((img) =>{
         return `  
         <img data-id="${img.id}"onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
     })
@@ -35,7 +33,8 @@ function renderCanvas() {
         if (userImg) img = userImg
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
         meme.lines.forEach(function (line) {
-            drawTxt(line.txt, line.pos, line.size, line.strokeColor, line.txtAlign, meme.fontFamily)
+            drawTxt(line.txt, line.pos, line.size, line.strokeColor,
+                line.txtAlign, meme.fontFamily, line.fillColor)
         })
     }
 }
@@ -46,11 +45,11 @@ function renderUserController(txt, fontSize) {
     renderFontSize(fontSize)
 }
 
-function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
+function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily, fillColor) {
     gCtx.beginPath();
     gCtx.lineWidth = 2
     gCtx.strokeStyle = color
-    gCtx.fillStyle = 'white'
+    gCtx.fillStyle = fillColor
     gCtx.font = `${fontSize}px ${fontFamily}`
     gCtx.textAlign = txtAlign
     gCtx.fillText(txt, pos.x, pos.y, gElCanvas.width)
@@ -69,6 +68,8 @@ function onUpdateImg(elImg) {
 }
 
 function onAddTxt(txt) {
+    const width = gCtx.measureText(txt).width;
+    updateLineWidth(width);
     addTxt(txt)
     renderCanvas()
 }
@@ -174,9 +175,16 @@ function onUp() {
 function onLeave() {
     document.body.style.cursor = 'auto'
 }
+function onUpdateFill(color) {
+    updateFill(color)
+    renderCanvas()
+}
 
 function onShowGallery() {
+    restMeme()
+    document.body.classList.remove('menu-open')
     getEl('.gallery-container').classList.remove('hidden')
     getEl('header').classList.remove('hidden')
     getEl('.generator-container').classList.add('hidden')
 }
+

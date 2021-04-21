@@ -17,14 +17,8 @@
 
     <nav>
         <div class="main-nav flex space-between container">
-            <a class="logo font-big" href="#">Meme heros</a>
+            <a onclick="onShowGallery()" class="logo font-big" href="#">Meme heros</a>
             <ul class="link-container flex space-evenly column color-light font-big">
-                <!-- <li class="text-center">
-                    <select name="lengSelect" >
-                        <option value="en-us">🌍English</option>
-                        <option value="he">🌍Hebrew</option>
-                    </select>
-                </li> -->
                 <li>
                     <a href="#" onclick="onShowGallery()">🎨Gallery</a>
                 </li>
@@ -81,8 +75,11 @@
                     <button class="btn btn-remove-line " onclick="onRemoveLine()"></button>
                     <button class="btn btn-swicth-line" onclick="onSwitchLine()"></button>
                     <input class="add-txt-input" name="addTxt" oninput="onAddTxt(this.value)" type="text">
+                    <label class="btn update-fill ">
+                        <input class="hide color-input" oninput="onUpdateFill(this.value)" type="color">
+                    </label>
                     <label class="btn update-stroke ">
-                        <input class="hide color-input" oninput="onUpdateStroke(this.value)" type="color" name="" id="">
+                        <input class="hide color-input" oninput="onUpdateStroke(this.value)" type="color">
                     </label>
                     <button class="btn btn-align-left btn" onclick="onUpdateTxtAlign('left')"></button>
                     <button class="btn btn-align-center" onclick="onUpdateTxtAlign('center')"></button>
@@ -93,7 +90,7 @@
                     <!-- <button class="btn-move-up btn-move" onclick="onMoveLine(-1)"></button>
                             <button class="btn-move-down btn-move" onclick="onMoveLine(1)"></button> -->
                     <label class="update-font-size">Font size: <span class="font-size"></span>
-                        <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="50"
+                        <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="70"
                             value="22">
                     </label>
                     <select class="select-font" onchange="onUpdateFontFamily(this.value)">
@@ -119,8 +116,9 @@
         </section>
     </main>
 
-    <footer class="footer-container flex flex-center align-center bg-dark color-light">
-        <small class="flex align-center">&copy; A.D.A 2021</small>
+    <footer class="footer-container flex flex-center align-center column bg-dark color-light">
+        <a class="logo font-big" href="#">Meme heros</a>
+        <small class="flex align-center">&copy; A.D.A 2021 - All Rights Reserved </small>
     </footer>
 
     <script src="js/util-service.js"></script>
