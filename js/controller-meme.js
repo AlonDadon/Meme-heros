@@ -58,11 +58,12 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
 }
 
 function onUpdateImg(elImg, ev) {
-    ev.preventDefault()
+    // ev.preventDefault()
     if (!elImg) return
     getEl('.gallery-container').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
+    console.log(elImg);
     updateImg(elImg.dataset.id)
     resizeCanvas()
     createLine()

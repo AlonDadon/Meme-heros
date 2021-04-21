@@ -116,6 +116,7 @@ function addTxt(txt) {
 }
 
 function updateImg(id) {
+  
     gUserImg = null
     gMeme.selectedImgId = id
 }
@@ -156,14 +157,11 @@ function updateLinePos(pos) {
     gMeme.lines[idx].pos.x = pos.x
 }
 
-
 function resizeCanvas() {
     let img = new Image()
     img.src = `img/${gMeme.selectedImgId}.jpg`;
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    // gElCanvas.height = elContainer.offsetHeight
-    gElCanvas.height = (img.height * gElCanvas.width) / img.width
+    gElCanvas.height = img.height
+    gElCanvas.width =img.width
     updateCanvasSize(gElCanvas.width, gElCanvas.height)
 }
 
