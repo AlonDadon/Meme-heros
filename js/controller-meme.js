@@ -10,7 +10,7 @@ function onInit() {
     gElCanvas = document.querySelector('#canvas')
     gCtx = gElCanvas.getContext('2d')
     addListeners()
-    createLine()
+ 
     renderFontSize(getEl('[name="fontSize"]').value)
 }
 
@@ -59,11 +59,13 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
 
 function onUpdateImg(elImg, ev) {
     ev.preventDefault()
+    if(!elImg)return
     getEl('.grid-container').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
     updateImg(elImg.dataset.id)
     resizeCanvas()
+    createLine()
     createLine()
     renderCanvas()
 }

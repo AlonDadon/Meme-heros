@@ -16,7 +16,7 @@
 
     <nav>
         <div class="main-nav flex space-between container">
-            <div class="logo">Meme heros</div>
+            <a class="logo" href="#">Meme heros</a>
             <div>
                 <form onsubmit="" class="form-nav">
                     <label for="search">🔎</label>
@@ -87,64 +87,61 @@
 
 
 
-    <main class="container">
+    <main class="main-container container">
         <section class="grid-container"></section>
 
-        <section class="generator-container flex space-evenly  hidden">
+        <section class="generator-container flex space-evenly column  hidden">
 
             <section class="canvas-container">
-                <canvas id="canvas" width="400" height="400" style="outline:1px solid green"></canvas>
+                <canvas id="canvas" width="400" height="400"></canvas>
             </section>
 
-            <section class="user-controller flex column">
-                <div class="line1 flex">
-                    <label>Text
-                        <input class="add-txt-input" name="addTxt" oninput="onAddTxt(this.value)" type="text">
-                    </label>
-                </div>
-                <div class="line2 flex">
-                    <button class="btn-move-up btn-move" onclick="onMoveLine(-1)"></button>
-                    <button class="btn-move-down btn-move" onclick="onMoveLine(1)"></button>
+            <section class="user-controller-container">
+                
+                <div class="main-user-controller flex space-evenly">
                     <button class="btn-add-line btn-controller" onclick="onAddLine()"></button>
                     <button class="btn-remove-line btn-controller" onclick="onRemoveLine()"></button>
                     <button class="btn-swicth-line btn-controller" onclick="onSwitchLine()"></button>
-                </div>
-                <div class="line3">
-                    <label class="update-font-size">Font size: <span class="font-size"></span>
-                        <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="50"
-                            value="22">
+                    <input class="add-txt-input" name="addTxt" oninput="onAddTxt(this.value)" type="text">
+                    <label class="update-stroke btn-controller">
+                        <input class="hide color-input" oninput="onUpdateStroke(this.value)" type="color" name="" id="">
                     </label>
-                </div>
-                <div class="line4 flex">
                     <button class="btn-align-left btn-controller" onclick="onUpdateTxtAlign('left')"></button>
                     <button class="btn-align-center btn-controller" onclick="onUpdateTxtAlign('center')"></button>
                     <button class="btn-align-right btn-controller" onclick="onUpdateTxtAlign('right')"></button>
-                    <label class="update-stroke btn-controller">
-                        <input class="hide" oninput="onUpdateStroke(this.value)" type="color" name="" id="">
-                    </label>
                 </div>
-                <div class="line5  ">
-                    <select class="select-font" onchange="onUpdateFontFamily(this.value)">
-                        <option value="rockSalt">Rock salt</option>
-                        <option value="fantasy">fantasy</option>
-                        <option value="cursive">cursive</option>
-                        <option value="monospace">Monospace</option>
-                    </select>
+
+                <div class="second-user-controller flex space-evenly">
+                    <!-- <button class="btn-move-up btn-move" onclick="onMoveLine(-1)"></button>
+                            <button class="btn-move-down btn-move" onclick="onMoveLine(1)"></button> -->
+                            <label class="update-font-size">Font size: <span class="font-size"></span>
+                                <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="50"
+                                    value="22">
+                            </label>
+                            <select class="select-font" onchange="onUpdateFontFamily(this.value)">
+                                <option value="rockSalt">Rock salt</option>
+                                <option value="fantasy">fantasy</option>
+                                <option value="cursive">cursive</option>
+                                <option value="monospace">Monospace</option>
+                            </select>
                 </div>
-                <div class="line6 flex">
-                    <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-                        <input name="img" id="imgData" type="hidden" />
+
+                <div class="flex column">
+                    <form  method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input  name="img" id="imgData" type="hidden" />
                         <button class="btn" type="submit">Publish</button>
                         <a href="#" class="btn " onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
                         <div class="share-container flex"></div>
                     </form>
-
+                    <input class="btn" type="file" class="file-input " name="image" onchange="onImgInput(event)">
                 </div>
-                <input type="file" class="file-input " name="image" onchange="onImgInput(event)">
             </section>
         </section>
     </main>
 
+    <footer>
+        <small>A.D.A-2021</small>
+    </footer>
 
     <script src="js/util-service.js"></script>
     <script src="js/upload-service.js"></script>

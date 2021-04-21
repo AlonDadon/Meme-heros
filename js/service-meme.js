@@ -45,12 +45,14 @@ function updateCanvasSize(width, height) {
 }
 
 function switchLine(idx) {
-    if (!idx) {
+    if (idx || idx === 0) {
+        gMeme.selectedLineIdx = idx
+    } else {
         gMeme.selectedLineIdx++
         if (gMeme.selectedLineIdx >= gMeme.lines.length) {
             gMeme.selectedLineIdx = 0
         }
-    } else gMeme.selectedLineIdx = idx
+    }
 }
 
 function createLine() {
@@ -129,15 +131,17 @@ function updateLinePosY(diff) {
 }
 function isLineClicked(clickedPos) {
     return gMeme.lines.some(function (line) {
-        const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2)
-        return distance <= line.lineSize
+        const distanceX = Math.abs(line.pos.x - clickedPos.x)
+        const distanceY = Math.abs(line.pos.y - clickedPos.y)
+        return (distanceX <= line.lineSize && distanceY <= 20)
     })
 }
 
 function getLineIdxByPos(clickedPos) {
     return gMeme.lines.findIndex(function (line) {
-        const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2)
-        return distance <= line.lineSize
+        const distanceX = Math.abs(line.pos.x - clickedPos.x)
+        const distanceY = Math.abs(line.pos.y - clickedPos.y)
+        return (distanceX <= line.lineSize && distanceY <= 20)
     })
 }
 
@@ -158,6 +162,7 @@ function resizeCanvas() {
     img.src = `img/${gMeme.selectedImgId}.jpg`;
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.offsetWidth
+    // gElCanvas.height = elContainer.offsetHeight
     gElCanvas.height = (img.height * gElCanvas.width) / img.width
     updateCanvasSize(gElCanvas.width, gElCanvas.height)
 }
