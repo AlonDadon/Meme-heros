@@ -10,7 +10,7 @@ function onInit() {
     gElCanvas = document.querySelector('#canvas')
     gCtx = gElCanvas.getContext('2d')
     addListeners()
- 
+
     renderFontSize(getEl('[name="fontSize"]').value)
 }
 
@@ -59,7 +59,7 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
 
 function onUpdateImg(elImg, ev) {
     ev.preventDefault()
-    if(!elImg)return
+    if (!elImg) return
     getEl('.gallery-container').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
@@ -179,4 +179,10 @@ function onUp() {
 
 function onLeave() {
     document.body.style.cursor = 'auto'
+}
+
+function onShowGallery() {
+    getEl('.gallery-container').classList.remove('hidden')
+    getEl('header').classList.remove('hidden')
+    getEl('.generator-container').classList.add('hidden')
 }

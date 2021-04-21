@@ -104,7 +104,7 @@ function createImgs(size) {
 function createImg(imgNum) {
     return {
         id: imgNum,
-        src: `img/${imgNum}.jpg`,
+        src: `./img/${imgNum}.jpg`,
         keywords: ['happy']
     }
 }
