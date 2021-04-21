@@ -17,7 +17,7 @@ function onInit() {
 function renderGallery(imgs) {
     var strHtml = imgs.map(function (img) {
         return `  
-        <img data-id="${img.id}"onclick="onUpdateImg(this,event)"  src="${img.src}" alt="">`
+        <img data-id="${img.id}"onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
     })
     getEl('.gallery-container').innerHTML = strHtml.join('')
 }
@@ -57,13 +57,10 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
     gCtx.strokeText(txt, pos.x, pos.y, gElCanvas.width)
 }
 
-function onUpdateImg(elImg, ev) {
-    // ev.preventDefault()
-    if (!elImg) return
+function onUpdateImg(elImg) {
     getEl('.gallery-container').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
-    console.log(elImg);
     updateImg(elImg.dataset.id)
     resizeCanvas()
     createLine()
@@ -134,10 +131,6 @@ function toggleMenu() {
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderCanvas()
-    })
 }
 
 function addMouseListeners() {
