@@ -19,7 +19,7 @@ function renderGallery(imgs) {
         return `  
         <img data-id="${img.id}"onclick="onUpdateImg(this,event)"  src="${img.src}" alt="">`
     })
-    getEl('.grid-container').innerHTML = strHtml.join('')
+    getEl('.gallery-container').innerHTML = strHtml.join('')
 }
 
 function renderCanvas() {
@@ -60,7 +60,7 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily) {
 function onUpdateImg(elImg, ev) {
     ev.preventDefault()
     if(!elImg)return
-    getEl('.grid-container').classList.add('hidden')
+    getEl('.gallery-container').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
     updateImg(elImg.dataset.id)

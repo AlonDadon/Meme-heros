@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Meme heros</title>
     <link rel="shortcut icon" href="img/favIcon/logo/favicon-32x32.png" type="image/x-icon">
 </head>
@@ -16,57 +17,33 @@
 
     <nav>
         <div class="main-nav flex space-between container">
-            <a class="logo" href="#">Meme heros</a>
-            <div>
-                <form onsubmit="" class="form-nav">
-                    <label for="search">🔎</label>
-                    <input class="" id="search" type="search" placeholder="Search">
-                </form>
-            </div>
-            <ul class="link-container">
-                <li class="user-pref flex space-evenly">
-                    <label for="checkbox">Dark/Light skin 🌞</label>
-                    <input type="checkbox" id="checkbox" name="checkbox">🌙
-                </li>
-                <li class="text-center">
-                    <select name="lengSelect" id="">
-                        <option value="">🌍English</option>
-                        <option value="">🌍Hebrew</option>
+            <a class="logo font-big" href="#">Meme heros</a>
+            <ul class="link-container flex space-evenly column color-light font-big">
+                <!-- <li class="text-center">
+                    <select name="lengSelect" >
+                        <option value="en-us">🌍English</option>
+                        <option value="he">🌍Hebrew</option>
                     </select>
-                </li>
-                <div class="flex space-evenly connect-link">
-                    <li>
-                        <a href="#">🔑Login</a>
-                    </li>
-                    <li>
-                        <a href="#">👨‍👨‍👦‍👦register</a>
-                    </li>
-                </div>
+                </li> -->
                 <li>
-                    <a href="#">🎨gallery</a>
+                    <a href="#">🎨Gallery</a>
                 </li>
                 <li>
-                    <a href="#">🎲Draw image</a>
-                </li>
-                <li>
-                    <a href="#">🎴My Pictures</a>
-                </li>
-                <li>
-                    <a href="#">👓Custom skin</a>
+                    <a href="#">🎴Memes</a>
                 </li>
                 <li>
                     <a href="#">📄About</a>
                 </li>
             </ul>
-            <button class="btn-menu" onclick="toggleMenu()">☰</button>
+            <button class="btn-menu font-med" onclick="toggleMenu()">☰</button>
         </div>
     </nav>
 
-    <header ont class="main-header container flex column">
-        <h1>Meme heros generator</h1>
+    <header ont class="main-header container flex column color-light">
+        <h1 class="color-dark">Meme heros generator</h1>
         <h2>Create your own hero card</h2>
         <h3>The most popular</h3>
-        <ul class="tag-container flex space-evenly">
+        <ul class="tag-container font-med flex space-evenly">
             <li>
                 <a href="">Funny</a>
             </li>
@@ -88,59 +65,62 @@
 
 
     <main class="main-container container">
-        <section class="grid-container"></section>
+        <section class="gallery-container"></section>
 
-        <section class="generator-container flex space-evenly column  hidden">
+        <section class="generator-container flex flex-center column hidden">
 
             <section class="canvas-container">
                 <canvas id="canvas" width="400" height="400"></canvas>
             </section>
 
             <section class="user-controller-container">
-                
-                <div class="main-user-controller flex space-evenly">
-                    <button class="btn-add-line btn-controller" onclick="onAddLine()"></button>
-                    <button class="btn-remove-line btn-controller" onclick="onRemoveLine()"></button>
-                    <button class="btn-swicth-line btn-controller" onclick="onSwitchLine()"></button>
+                <h4 class="hidden">Controller</h4>
+
+                <div class="main-user-controller flex space-evenly font-small">
+                    <button class="btn btn-add-line " onclick="onAddLine()"></button>
+                    <button class="btn btn-remove-line " onclick="onRemoveLine()"></button>
+                    <button class="btn btn-swicth-line" onclick="onSwitchLine()"></button>
                     <input class="add-txt-input" name="addTxt" oninput="onAddTxt(this.value)" type="text">
-                    <label class="update-stroke btn-controller">
+                    <label class="btn update-stroke ">
                         <input class="hide color-input" oninput="onUpdateStroke(this.value)" type="color" name="" id="">
                     </label>
-                    <button class="btn-align-left btn-controller" onclick="onUpdateTxtAlign('left')"></button>
-                    <button class="btn-align-center btn-controller" onclick="onUpdateTxtAlign('center')"></button>
-                    <button class="btn-align-right btn-controller" onclick="onUpdateTxtAlign('right')"></button>
+                    <button class="btn btn-align-left btn" onclick="onUpdateTxtAlign('left')"></button>
+                    <button class="btn btn-align-center" onclick="onUpdateTxtAlign('center')"></button>
+                    <button class="btn btn-align-right " onclick="onUpdateTxtAlign('right')"></button>
                 </div>
 
-                <div class="second-user-controller flex space-evenly">
+                <div class="second-user-controller flex space-evenly font-small">
                     <!-- <button class="btn-move-up btn-move" onclick="onMoveLine(-1)"></button>
                             <button class="btn-move-down btn-move" onclick="onMoveLine(1)"></button> -->
-                            <label class="update-font-size">Font size: <span class="font-size"></span>
-                                <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="50"
-                                    value="22">
-                            </label>
-                            <select class="select-font" onchange="onUpdateFontFamily(this.value)">
-                                <option value="rockSalt">Rock salt</option>
-                                <option value="fantasy">fantasy</option>
-                                <option value="cursive">cursive</option>
-                                <option value="monospace">Monospace</option>
-                            </select>
+                    <label class="update-font-size">Font size: <span class="font-size"></span>
+                        <input name="fontSize" oninput="onUpdateFontSize(this.value)" type="range" min="16" max="50"
+                            value="22">
+                    </label>
+                    <select class="select-font" onchange="onUpdateFontFamily(this.value)">
+                        <option value="rockSalt">Rock salt</option>
+                        <option value="fantasy">fantasy</option>
+                        <option value="cursive">cursive</option>
+                        <option value="monospace">Monospace</option>
+                    </select>
                 </div>
 
-                <div class="flex column">
-                    <form  method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-                        <input  name="img" id="imgData" type="hidden" />
+                <div class="third-user-controller  flex column align-center">
+                    <form method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
                         <button class="btn" type="submit">Publish</button>
                         <a href="#" class="btn " onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
                         <div class="share-container flex"></div>
                     </form>
-                    <input class="btn" type="file" class="file-input " name="image" onchange="onImgInput(event)">
+                    <label class="btn">Upload image
+                        <input class="hidden" type="file" class="file-input " name="image" onchange="onImgInput(event)">
+                    </label>
                 </div>
             </section>
         </section>
     </main>
 
-    <footer>
-        <small>A.D.A-2021</small>
+    <footer class="footer-container flex flex-center align-center bg-dark color-light">
+        <small class="flex align-center">&copy; A.D.A 2021</small>
     </footer>
 
     <script src="js/util-service.js"></script>
