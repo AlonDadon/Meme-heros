@@ -522,7 +522,10 @@ footer small {
         max-width: 75vw;
     }
     .main-user-controller{
-        max-width: 70vh;
+        max-width: 49vh;
+    }
+    .add-txt-input{
+        width: 30%;
     }
 }
  
