@@ -578,18 +578,26 @@ footer small {
     .add-txt-input {
         width: 30%;
     }
-    .top-nav{
-        padding: 20px 0px;  
+    .top-nav {
+        padding: 20px 0px;
     }
-    .top-nav h3{
+    .top-nav h3 {
         font-size: 2.5rem;
     }
-    [name=search-by-tag]{
+    [name=search-by-tag] {
         width: 60%;
     }
+    .btn-call-to-action {
+        font-size: 1.3rem;
+        padding: 8px 40px;
+    }
+    .main-header h2{
+        padding-bottom: 60px;
+    }
 }
+
 @media screen and(max-width:400px) {
-    .main-header h1{
+    .main-header h1 {
         font-size: 3.1rem;
     }
 }
