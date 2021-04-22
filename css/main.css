@@ -13,6 +13,7 @@
 }
 
 html {
+    scroll-behavior: smooth;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -39,6 +40,7 @@ select, button, a, input label {
     cursor: pointer;
     color: inherit;
     font-size: inherit;
+    outline: none;
 }
 
 li {
@@ -66,7 +68,11 @@ img {
     background-color: #090313;
 }
 
-.font-big {
+.font-extra-large {
+    font-size: 3.3rem;
+}
+
+.font-large {
     font-size: 2rem;
 }
 
@@ -179,6 +185,8 @@ body.menu-open .main-screen {
     font-size: 3.5rem;
     text-decoration: overline;
     text-shadow: 0 0 2.2px #ffffff;
+    width: fit-content;
+    align-self: center;
 }
 
 .main-header h2 {
@@ -186,13 +194,54 @@ body.menu-open .main-screen {
     padding-bottom: 32px;
 }
 
-.main-header h3 {
-    text-decoration: underline;
+.btn-call-to-action {
+    background: linear-gradient(to bottom, #c7c7c7 5%, #f4fcff 100%);
+    border-radius: 17px;
+    font-weight: bold;
+    padding: 12px 43px;
+    text-shadow: 0px 1px 0px #b23e35;
+    width: fit-content;
+    align-self: center;
+    color: #00aaff;
+    font-size: 1.5rem;
+    box-shadow: 0 0 whitesmoke;
+    border: 1px solid;
+    transition: box-shadow .5s;
 }
 
-.tag-container {
-    text-transform: capitalize;
-    text-shadow: 1px 2px 2px #0134ec;
+.btn-call-to-action:hover {
+    box-shadow: 0 0 6px 3px whitesmoke;
+}
+
+.top-nav {
+    padding: 20px 50px;
+    margin-bottom: 50px;
+    background: linear-gradient( 40deg, #ffffffc7, #b1b1b1ab);
+    background-color: grey;
+}
+
+.top-nav h3 {
+    align-self: center;
+    text-shadow: 0 0 2px #090313;
+}
+
+[name=search-by-tag] {
+    align-self: center;
+    width: 40%;
+    height: 2rem;
+    text-align: center;
+    border: 2px solid gray;
+    border-radius: 1rem;
+    padding: 18px;
+    outline: none;
+}
+
+[name=search-by-tag]:focus {
+    box-shadow: 0px 0px 4px 1px #060606b8;
+}
+
+.top-nav a:hover {
+    color: #7a7171;
 }
 
 .tag-container a {
@@ -203,7 +252,6 @@ body.menu-open .main-screen {
 }
 
 .tag-container a:hover {
-    color: #8caaff;
     box-shadow: 1px 1px 1px 1px #dfd4d430;
 }
 
@@ -316,7 +364,6 @@ body.menu-open .main-screen {
 
 .update-fill {
     background-color: #cbff8f;
-    ;
     background-image: url(../img/btn/paint-board-and-brush.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -448,6 +495,10 @@ footer small {
         border-radius: 0.8rem;
         padding: 200px 230px;
         background-size: contain;
+        margin-bottom: 50px;
+    }
+    .main-header h2 {
+        margin-bottom: 11px;
     }
     .generator-container {
         flex-direction: row;
@@ -517,15 +568,28 @@ footer small {
     }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width:575px) {
     .canvas-container {
         max-width: 75vw;
     }
-    .main-user-controller{
+    .main-user-controller {
         max-width: 49vh;
     }
-    .add-txt-input{
+    .add-txt-input {
         width: 30%;
     }
+    .top-nav{
+        padding: 20px 0px;  
+    }
+    .top-nav h3{
+        font-size: 2.5rem;
+    }
+    [name=search-by-tag]{
+        width: 60%;
+    }
 }
- 
+@media screen and(max-width:400px) {
+    .main-header h1{
+        font-size: 3.1rem;
+    }
+}

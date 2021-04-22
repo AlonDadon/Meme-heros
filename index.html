@@ -17,8 +17,8 @@
 
     <nav>
         <div class="main-nav flex space-between container">
-            <a onclick="onShowGallery()" class="logo font-big" href="#">Meme heros</a>
-            <ul class="link-container flex space-evenly column color-light font-big">
+            <a onclick="onShowGallery()" class="logo font-large" href="#">Meme heros</a>
+            <ul class="link-container flex space-evenly column color-light font-large">
                 <li>
                     <a href="#" onclick="onShowGallery()">🎨Gallery</a>
                 </li>
@@ -33,11 +33,11 @@
         </div>
     </nav>
 
-    <header ont class="main-header container flex column color-light">
+    <header class="main-header container flex column color-light">
         <h1 class="color-dark">Meme heros generator</h1>
         <h2>Create your own hero card</h2>
-        <h3>The most popular</h3>
-        <ul class="tag-container font-med flex space-evenly">
+        <!-- <h3>The most popular</h3> -->
+        <!-- <ul class="tag-container font-med flex space-evenly">
             <li>
                 <a href="">Funny</a>
             </li>
@@ -53,13 +53,34 @@
             <li>
                 <a href="">Action</a>
             </li>
-        </ul>
+        </ul> -->
+        <a  href="#top-nav" class="btn-call-to-action">Choice hero</a>
     </header>
 
-
+<nav id="top-nav" class="top-nav flex column color-light  ">
+    <h3 class="font-extra-large" >The most popular</h3>
+    <input class="" type="search" name="search-by-tag" oninput="" placeholder="Write a tag to find a hero">
+    <ul class="tag-container font-med flex space-evenly color-dark">
+        <li>
+            <a href="">Funny</a>
+        </li>
+        <li>
+            <a href="">Love</a>
+        </li>
+        <li>
+            <a href="">Action</a>
+        </li>
+        <li>
+            <a href="">Dark</a>
+        </li>
+        <li>
+            <a href="">More...</a>
+        </li>
+    </ul>
+</nav>
 
     <main class="main-container container">
-        <section class="gallery-container"></section>
+        <section  class="gallery-container"></section>
 
         <section class="generator-container flex flex-center column hidden">
 
@@ -74,7 +95,7 @@
                     <button class="btn btn-add-line " onclick="onAddLine()"></button>
                     <button class="btn btn-remove-line " onclick="onRemoveLine()"></button>
                     <button class="btn btn-swicth-line" onclick="onSwitchLine()"></button>
-                    <input class="add-txt-input" name="addTxt" oninput="onAddTxt(this.value)" type="text">
+                    <input class="add-txt-input" placeholder="Add text" name="addTxt" oninput="onAddTxt(this.value)" type="text">
                     <label class="btn update-fill ">
                         <input class="hide color-input" oninput="onUpdateFill(this.value)" type="color">
                     </label>
@@ -105,7 +126,7 @@
                     <form method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                         <input name="img" id="imgData" type="hidden" />
                         <button class="btn" type="submit">Publish</button>
-                        <a href="#" class="btn " onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
+                        <a href="#" class="btn" onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
                         <div class="share-container flex"></div>
                     </form>
                     <label class="btn">Upload image
@@ -117,7 +138,7 @@
     </main>
 
     <footer class="footer-container flex flex-center align-center column bg-dark color-light">
-        <a class="logo font-big" href="#">Meme heros</a>
+        <a class="logo font-large" href="#">Meme heros</a>
         <small class="flex align-center">&copy; A.D.A 2021 - All Rights Reserved </small>
     </footer>
 

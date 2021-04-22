@@ -13,7 +13,7 @@ function onInit() {
 }
 
 function renderGallery(imgs) {
-    const strHtml = imgs.map((img) =>{
+    const strHtml = imgs.map((img) => {
         return `  
         <img data-id="${img.id}"onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
     })
@@ -58,6 +58,7 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily, fillColor) {
 
 function onUpdateImg(elImg) {
     getEl('.gallery-container').classList.add('hidden')
+    getEl('.top-nav').classList.add('hidden')
     getEl('header').classList.add('hidden')
     getEl('.generator-container').classList.remove('hidden')
     updateImg(elImg.dataset.id)
@@ -183,6 +184,7 @@ function onUpdateFill(color) {
 function onShowGallery() {
     restMeme()
     document.body.classList.remove('menu-open')
+    getEl('.top-nav').classList.remove('hidden')
     getEl('.gallery-container').classList.remove('hidden')
     getEl('header').classList.remove('hidden')
     getEl('.generator-container').classList.add('hidden')
