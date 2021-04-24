@@ -11,10 +11,18 @@ var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
     lines: [],
-    fontFamily: 'rockSalt'
+    fontFamily: 'rockSalt',
+    countShowImg: 10,
+    maxImgToAdd: 5,
+    maxImgs: 20
 }
-var gImgs = []
-createImgs(18)
+
+var gImgs = createImgs(gMeme.countShowImg)
+
+
+function getImgs() {
+    return gImgs
+}
 
 function removeLine() {
     const idx = gMeme.selectedLineIdx
@@ -79,11 +87,11 @@ function createLine() {
 }
 
 function getLinePosY() {
-    const topLine = gMeme.lines.some((line)=>{
+    const topLine = gMeme.lines.some((line) => {
         return (line.pos.y === 40)
     })
     if (topLine) {
-        var bottomLine = gMeme.lines.some((line)=> {
+        var bottomLine = gMeme.lines.some((line) => {
             return (line.pos.y === gMeme.canvasSize.height - gMeme.spaceBetweenLine)
         })
     }
@@ -96,23 +104,27 @@ function getLinePosY() {
     return posY
 }
 
-function getImgs() {
-    return gImgs
-}
 function getMeme() {
     return gMeme
 }
 function createImgs(size) {
+    const imgs = []
     for (let i = 0; i < size; i++) {
-        gImgs.push(createImg(i + 1))
+        const keywordStrs = ['happy', 'adventures', 'action', 'funny', 'dark']
+        const startIdx = getRandomInt(0, keywordStrs.length - 1)
+        const KeyWordsLength = (startIdx === 0) ? 1 : getRandomInt(startIdx, keywordStrs.length - 1)
+        let keyWords = keywordStrs.splice(startIdx, KeyWordsLength)
+        if (i === 10 || i === 11 || i === 17) keyWords = ['love']
+        imgs.push(createImg(i + 1, keyWords))
     }
+    return imgs
 }
 
-function createImg(imgNum) {
+function createImg(imgNum, keywords) {
     return {
         id: imgNum,
         src: `./img/${imgNum}.jpg`,
-        keywords: ['happy']
+        keywords,
     }
 }
 
@@ -190,9 +202,37 @@ function getEvPos(ev) {
 
 function restMeme() {
     gMeme.lines = []
+    gMeme.countShowImg = 10
+    gImgs = []
+    createImgs(gMeme.countShowImg)
 }
 
 function updateLineWidth(width) {
     const idx = gMeme.selectedLineIdx
     gMeme.lines[idx].lineWidth = width;
+}
+
+function updateShowMoreImgs() {
+    gImgs = []
+    gMeme.countShowImg += gMeme.maxImgToAdd
+    if (gMeme.countShowImg >= gMeme.maxImgs) {
+        gMeme.countShowImg = gMeme.maxImgs
+    }
+    gImgs = createImgs(gMeme.countShowImg)
+}
+
+function setImgFilter(str) {
+    const imgs = createImgs(gMeme.maxImgs)
+    const filterImgs = imgs.filter((img) => {
+        const isKeyword = img.keywords.some((keyWord) => {
+            if (keyWord.includes(str.toLowerCase())) {
+                for (let i = 0; i < str.length; i++) {
+                    if (str.charAt(i) !== keyWord.charAt(i)) return false
+                }
+                return true
+            }
+        })
+        return (isKeyword)
+    })
+    return (!filterImgs || !filterImgs.length) ? gImgs : filterImgs
 }

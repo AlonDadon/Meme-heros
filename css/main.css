@@ -259,10 +259,24 @@ body.menu-open .main-screen {
     margin: 40px;
 }
 
+.main-container .btn-call-to-action {
+    color: indianred;
+    color: #00aaff;
+    border: 2px solid;
+    position: relative;
+    transition: padding 2.3s;
+}
+
+.main-container .btn-call-to-action:hover::after {
+    position: absolute;
+    content: '...';
+}
+
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 18px 13px;
+    margin-bottom: 60px;
 }
 
 .gallery-container img {
@@ -591,7 +605,7 @@ footer small {
         font-size: 1.3rem;
         padding: 8px 40px;
     }
-    .main-header h2{
+    .main-header h2 {
         padding-bottom: 60px;
     }
 }
@@ -600,5 +614,4 @@ footer small {
     .main-header h1 {
         font-size: 3.1rem;
     }
-    
 }

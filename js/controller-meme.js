@@ -57,6 +57,7 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily, fillColor) {
 }
 
 function onUpdateImg(elImg) {
+    getEl('.btn-load-img').classList.add('hidden')
     getEl('.gallery-container').classList.add('hidden')
     getEl('.top-nav').classList.add('hidden')
     getEl('header').classList.add('hidden')
@@ -184,9 +185,20 @@ function onUpdateFill(color) {
 function onShowGallery() {
     restMeme()
     document.body.classList.remove('menu-open')
+    getEl('.btn-load-img').classList.remove('hidden')
     getEl('.top-nav').classList.remove('hidden')
     getEl('.gallery-container').classList.remove('hidden')
     getEl('header').classList.remove('hidden')
     getEl('.generator-container').classList.add('hidden')
+    renderGallery(getImgs())
 }
 
+function onShowMoreImgs() {
+    updateShowMoreImgs()
+    renderGallery(getImgs())
+}
+
+function onSetImgFilter(str) {
+    const filterImgs = setImgFilter(str)
+    renderGallery(filterImgs)
+}

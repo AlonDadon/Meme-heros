@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/main.css">
-    <title>Meme heros</title>
+    <title>Meme heroes</title>
     <link rel="shortcut icon" href="img/favIcon/logo/favicon-32x32.png" type="image/x-icon">
 </head>
 
@@ -17,7 +17,7 @@
 
     <nav>
         <div class="main-nav flex space-between container">
-            <a onclick="onShowGallery()" class="logo font-large" href="#">Meme heros</a>
+            <a onclick="onShowGallery()" class="logo font-large" href="#">Meme heroes</a>
             <ul class="link-container flex space-evenly column color-light font-large">
                 <li>
                     <a href="#" onclick="onShowGallery()">🎨Gallery</a>
@@ -34,56 +34,42 @@
     </nav>
 
     <header class="main-header container flex column color-light">
-        <h1 class="color-dark">Meme heros generator</h1>
+        <h1 class="color-dark">Meme heroes generator</h1>
         <h2>Create your own hero card</h2>
-        <!-- <h3>The most popular</h3> -->
-        <!-- <ul class="tag-container font-med flex space-evenly">
-            <li>
-                <a href="">Funny</a>
-            </li>
-            <li>
-                <a href="">Love</a>
-            </li>
-            <li>
-                <a href="">Action</a>
-            </li>
-            <li>
-                <a href="">Dark</a>
-            </li>
-            <li>
-                <a href="">Action</a>
-            </li>
-        </ul> -->
-        <a  href="#top-nav" class="btn-call-to-action">Choice hero</a>
+        <a  href="#top-nav" class="btn-call-to-action">Choose a hero</a>
     </header>
 
 <nav id="top-nav" class="top-nav flex column color-light  ">
     <h3 class="font-extra-large" >The most popular</h3>
-    <input class="" type="search" name="search-by-tag" oninput="" placeholder="Write a tag to find a hero">
+    <input  type="search" name="search-by-tag" oninput="onSetImgFilter(this.value)" placeholder="Write a tag to find a hero">
     <ul class="tag-container font-med flex space-evenly color-dark">
         <li>
-            <a href="">Funny</a>
+            <a onclick=" onSetImgFilter('funny')">Funny</a>
         </li>
         <li>
-            <a href="">Love</a>
+            <a  onclick=" onSetImgFilter('love')" >Love</a>
         </li>
         <li>
-            <a href="">Action</a>
+            <a onclick=" onSetImgFilter('action')" >Action</a>
         </li>
         <li>
-            <a href="">Dark</a>
+            <a onclick=" onSetImgFilter('dark')" >Dark</a>
         </li>
         <li>
-            <a href="">More...</a>
+            <a>More...</a>
         </li>
     </ul>
 </nav>
 
     <main class="main-container container">
-        <section  class="gallery-container"></section>
-
+        <section  class="gallery-container">
+        </section>
+        
+        <div class="flex flex-center">
+            <button class="btn-load-img btn-call-to-action" onclick="onShowMoreImgs()">Load more</button>
+        </div>
+        
         <section class="generator-container flex flex-center column hidden">
-
             <section class="canvas-container">
                 <canvas id="canvas" width="400" height="400"></canvas>
             </section>
@@ -138,7 +124,7 @@
     </main>
 
     <footer class="footer-container flex flex-center align-center column bg-dark color-light">
-        <a class="logo font-large" href="#">Meme heros</a>
+        <a class="logo font-large" href="#">Meme heroes</a>
         <small class="flex align-center">&copy; A.D.A 2021 - All Rights Reserved </small>
     </footer>
 
