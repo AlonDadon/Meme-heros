@@ -123,7 +123,7 @@ function createImgs(size) {
 function createImg(imgNum, keywords) {
     return {
         id: imgNum,
-        src: `./img/${imgNum}.jpg`,
+        src: `../img/${imgNum}.jpg`,
         keywords,
     }
 }
