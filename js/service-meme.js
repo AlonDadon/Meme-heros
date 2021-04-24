@@ -204,7 +204,8 @@ function restMeme() {
     gMeme.lines = []
     gMeme.countShowImg = 10
     gImgs = []
-    createImgs(gMeme.countShowImg)
+    gImgs = createImgs(gMeme.countShowImg)
+
 }
 
 function updateLineWidth(width) {
@@ -234,5 +235,5 @@ function setImgFilter(str) {
         })
         return (isKeyword)
     })
-    return (!filterImgs || !filterImgs.length) ? gImgs : filterImgs
+    return filterImgs
 }
