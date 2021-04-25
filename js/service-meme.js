@@ -117,13 +117,14 @@ function createImgs(size) {
         if (i === 10 || i === 11 || i === 17) keyWords = ['love']
         imgs.push(createImg(i + 1, keyWords))
     }
+
     return imgs
 }
 
 function createImg(imgNum, keywords) {
     return {
         id: imgNum,
-        src: `./img/${imgNum}.jpg`,
+        src: `img/${imgNum}.jpg`,
         keywords,
     }
 }
@@ -148,7 +149,7 @@ function updateLinePosY(diff) {
     gMeme.lines[idx].pos.y += diff
 }
 function isLineClicked(clickedPos) {
-    return gMeme.lines.some(function (line) {
+    return gMeme.lines.some(line => {
         const distanceX = Math.abs(line.pos.x - clickedPos.x)
         const distanceY = Math.abs(line.pos.y - clickedPos.y)
         return (distanceX <= line.lineWidth && distanceY <= 20)
@@ -156,7 +157,7 @@ function isLineClicked(clickedPos) {
 }
 
 function getLineIdxByPos(clickedPos) {
-    return gMeme.lines.findIndex(function (line) {
+    return gMeme.lines.findIndex(line => {
         const distanceX = Math.abs(line.pos.x - clickedPos.x)
         const distanceY = Math.abs(line.pos.y - clickedPos.y)
         return (distanceX <= line.lineWidth && distanceY <= 20)
@@ -175,14 +176,6 @@ function updateLinePos(pos) {
 }
 
 
-function resizeCanvas() {
-    let img = new Image()
-    img.src = `img/${gMeme.selectedImgId}.jpg`;
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = (img.height * gElCanvas.width) / img.width
-    updateCanvasSize(gElCanvas.width, gElCanvas.height)
-}
 
 function getEvPos(ev) {
     var pos = {

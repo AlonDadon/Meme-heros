@@ -21,20 +21,19 @@ function renderGallery(imgs) {
 }
 
 function renderCanvas() {
-    let meme = getMeme()
-    let idx = meme.selectedLineIdx
-    let userImg = getUserImg()
-    if (meme.lines[idx] || meme.lines.length) {
+    const meme = getMeme()
+    const idx = meme.selectedLineIdx
+    const userImg = getUserImg()
+    if (meme.lines[idx]) {
         renderUserController(meme.lines[idx].txt, meme.lines[idx].size)
     }
     let img = new Image()
     img.src = `img/${meme.selectedImgId}.jpg`;
     img.onload = () => {
         if (userImg) img = userImg
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height,);
         meme.lines.forEach(function (line) {
-            drawTxt(line.txt, line.pos, line.size, line.strokeColor,
-                line.txtAlign, meme.fontFamily, line.fillColor)
+            drawTxt(line, meme.fontFamily)
         })
     }
 }
@@ -45,8 +44,8 @@ function renderUserController(txt, fontSize) {
     renderFontSize(fontSize)
 }
 
-function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily, fillColor) {
-    gCtx.beginPath();
+function drawTxt({ txt, pos, fontSize, color, txtAlign, fillColor }, fontFamily) {
+    gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = color
     gCtx.fillStyle = fillColor
@@ -57,7 +56,7 @@ function drawTxt(txt, pos, fontSize, color, txtAlign, fontFamily, fillColor) {
 }
 
 function onUpdateImg(elImg) {
-    getEl('.btn-load-img').classList.add('hidden')
+    getEl('.btn-load-img').style.display = 'none'
     getEl('.gallery-container').classList.add('hidden')
     getEl('.top-nav').classList.add('hidden')
     getEl('header').classList.add('hidden')
@@ -123,6 +122,7 @@ function onDownloadImg(elLink) {
     let imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
 }
+
 function onImgInput(ev) {
     loadImageFromInput(ev, renderCanvas)
 }
@@ -140,7 +140,6 @@ function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mouseup', onUp)
-    gElCanvas.addEventListener('mouseleave', onLeave)
 }
 
 function addTouchListeners() {
@@ -155,7 +154,7 @@ function onDown(ev) {
     let lineIdx = getLineIdxByPos(pos)
     switchLine(lineIdx)
     updateIsDragging(true)
-    document.body.style.cursor = 'grabbing'
+    gElCanvas.style.cursor = 'grabbing'
 }
 
 function onMove(ev) {
@@ -171,12 +170,13 @@ function onMove(ev) {
 
 function onUp() {
     updateIsDragging(false)
-    document.body.style.cursor = 'grab'
+   gElCanvas.style.cursor = 'auto'
 }
 
-function onLeave() {
-    document.body.style.cursor = 'auto'
-}
+// function onLeave() {
+//     document.body.style.cursor = 'auto'
+// }
+
 function onUpdateFill(color) {
     updateFill(color)
     renderCanvas()
@@ -201,4 +201,13 @@ function onShowMoreImgs() {
 function onSetImgFilter(str) {
     const filterImgs = setImgFilter(str)
     renderGallery(filterImgs)
+}
+
+function resizeCanvas() {
+    let img = new Image()
+    img.src = `img/${gMeme.selectedImgId}.jpg`;
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = (img.height * gElCanvas.width) / img.width
+    updateCanvasSize(gElCanvas.width, gElCanvas.height)
 }
