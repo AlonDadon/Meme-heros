@@ -25,7 +25,7 @@ body {
     color: #212529;
     text-align: start;
     background-color: #eaeaea;
-    ;
+    background-image: url(../img/background.png)
 }
 
 h1, h2, h3, h4, h5, h6, p, div, ul select {
@@ -84,16 +84,17 @@ img {
 .font-small {
     font-size: 0.7rem;
 }
-
-.main-nav {
-    padding: 0 15px;
-    align-items: center;
+.main-nav-container{
     position: fixed;
     right: 0;
     top: 0;
     left: 0;
-    background-color: #fffffff0;
-    padding-bottom: 13px;
+    background: unset;
+    background-color: #ffffff;
+}
+.main-nav {
+    align-items: center;
+    pad: 5px;
 }
 
 .main-nav ul li {
@@ -104,6 +105,16 @@ img {
 
 .logo {
     font-family: rockSalt;
+    font-size: 1rem;
+}
+.btn-menu {
+    background-color: #554e4e;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin: 4px 0;
+    border-radius: 0.3rem;
 }
 
 .link-container {
@@ -115,7 +126,8 @@ img {
     top: 0;
     transform: translateY(-100%);
     width: 100%;
-    height: 50%;
+    height: 100%;
+    align-items: center;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     transition: transform .6s;
     cursor: pointer;
@@ -133,14 +145,16 @@ body.menu-open .link-container {
     margin: 0 auto;
     display: block;
 }
+.link-container  {
+    display: flex;
+    gap: 10px;
+}
 
 .link-container a {
     font-weight: 300;
     line-height: 36px;
     display: block;
-    padding-inline-start: 20px;
     transition: all 0.2s ease-in-out;
-    padding-bottom: 15px;
 }
 
 .link-container a:hover {
@@ -149,6 +163,7 @@ body.menu-open .link-container {
 }
 
 .main-screen {
+    margin: 0;
     background-color: rgba(0, 0, 0, .5);
     position: fixed;
     bottom: 0;
@@ -175,7 +190,7 @@ body.menu-open .main-screen {
     text-shadow: 0 0 2.2px #0e0f10;
     font-family: cursive;
     margin-bottom: 35px;
-    margin-top: 61px;
+    /* margin-top: 61px; */
     border-radius: 0.6rem;
     box-shadow: 0px 1px 3px 0px #090313;
 }
@@ -217,24 +232,27 @@ body.menu-open .main-screen {
 .top-nav {
     padding: 20px 50px;
     margin-bottom: 50px;
-    background: linear-gradient( 40deg, #ffffffc7, #b1b1b1ab);
-    background-color: grey;
+    background-color: red;
 }
 
 .top-nav h3 {
     align-self: center;
-    text-shadow: 0 0 2px #090313;
+    color: black;
+    font-family: rockSalt;
+    margin-bottom: 16px;
 }
 
 [name=search-by-tag] {
+    text-align: start;
     align-self: center;
     width: 40%;
     height: 2rem;
     text-align: center;
-    border: 2px solid gray;
+    border: none;
     border-radius: 1rem;
-    padding: 18px;
+    padding: 22px 10px;
     outline: none;
+    margin-bottom: 8px;
 }
 
 [name=search-by-tag]:focus {
@@ -245,15 +263,24 @@ body.menu-open .main-screen {
     color: #7a7171;
 }
 
+.tag-container  {
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
 .tag-container a {
     box-shadow: 1px 1px 1px 1px #775d5d30;
     padding: 4px;
     border-radius: 8px;
-    transition: color ease-in-out .2s, box-shadow .3s
+    padding: 10px 25px;
+    border: none;
+    outline: none;
+    background-color: white;
+    color: #d98d8d;
 }
 
 .tag-container a:hover {
-    box-shadow: 1px 1px 1px 1px #dfd4d430;
+    color: #d98d8d;
 }
 
 .main-container {
@@ -277,7 +304,7 @@ body.menu-open .main-screen {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 18px 13px;
-    margin-bottom: 60px;
+    margin: 0 auto 1.5rem  !important;
 }
 
 .gallery-container img {
@@ -292,40 +319,56 @@ body.menu-open .main-screen {
 }
 
 .generator-container {
-    margin-top: 75px;
     align-items: center;
+    gap: 8px;
+    padding-top: 40px;
+    margin: 20px auto ;
 }
 
 .main-user-controller {
-    position: fixed;
+    /* position: fixed; */
+    display:flex;
+    gap: 8px;
     right: 0;
     left: 0;
     bottom: 5px;
     max-width: 75vh;
-    margin: 0 auto;
-    background-color: #e6e6fa99;
+    /* margin: 0 auto; */
+    margin-bottom: 10px;
+    background: unset;
+    /* background-color: white; */
+
     border-radius: 2rem;
 }
 
 .second-user-controller {
-    position: fixed;
+    /* position: fixed; */
     right: 0;
     left: 0;
     bottom: 37px;
     max-width: 60vh;
     margin: 0 auto;
-    background-color: #e6e6fa99;
-    border-radius: 2rem;
+    /* background-color: #e6e6fa99; */
+    border-radius: 8px;
+    color: white;
+    padding: 6px;
+}
+.second-user-controller select {
+    color: black;
+    border-radius: 0.5rem;
+    
 }
 
-.generator-container .btn {
+.generator-container .btn-icon {
     padding: 1px 12px;
     color: aliceblue;
     background-size: cover;
     border-radius: 0.4rem;
     width: 28px;
     height: 28px;
-    margin: 0 1px;
+}
+.generator-container .btn{
+    color: white;
 }
 
 .color-input {
@@ -345,7 +388,12 @@ body.menu-open .main-screen {
 }
 
 .add-txt-input {
+    border-radius: 0.5rem;
     order: 1;
+    outline: none;
+    border: none;
+    padding: 8px
+
 }
 
 .btn-remove-line {
@@ -375,6 +423,7 @@ body.menu-open .main-screen {
     background-repeat: no-repeat;
     background-size: contain;
     order: 2;
+    width:28px
 }
 
 .update-fill {
@@ -384,13 +433,45 @@ body.menu-open .main-screen {
     background-size: contain;
     order: 1;
 }
-
+.third-user-controller {
+    margin-bottom: 8px;
+    justify-content: center;
+    display: flex;
+    /* gap: 8px; */
+}
+.third-user-controller  form{
+    display: flex;
+    gap: 8px;
+}
 .third-user-controller .btn {
     background: #3498db;
-    border-radius: 28px;
-    padding: 10px 20px 10px 20px;
-    width: unset;
-    height: unset;
+    border-radius: 0.5rem;
+    /* padding: 10px 25px; */
+    padding: 10px 5px;
+    border: none;
+    outline: unset;
+}
+.third-user-controller .btn-red {
+    background: red;
+}
+.third-user-controller .btn-red:hover {
+    background: red !important;
+}
+.third-user-controller .btn-blue {
+    background: #325ba6;
+}
+.third-user-controller .btn-blue:hover {
+    background:#325ba6 !important;
+}
+.third-user-controller .btn-outline {
+    background: unset;
+    border: 1px solid white;
+    transition:  0.2s;
+}
+.third-user-controller .btn-outline:hover {
+    background: unset;
+    border: 1px solid rgb(255, 0, 0);
+    background:unset !important;
 }
 
 .third-user-controller .btn:hover {
@@ -404,21 +485,27 @@ body.menu-open .main-screen {
 #canvas {
     box-shadow: 0 0px 1px 1px #828488;
     border-radius: 2rem;
+    height: 440px;
 }
 
 .footer-container {
-    padding: 30px 0;
+    padding: 8px 0;
+    height: 180px;
     box-shadow: 0 -2px 5px 0 rgb(0 0 0 / 16%), 0 -2px 10px 0 rgb(0 0 0 / 12%);
     border-radius: 0 .5rem;
 }
+.footer-container div:first-of-type{
+    height: 100%;
+    justify-content:space-evenly;
+}
 
-footer a {
+/* footer a {
     margin-top: 50px;
-}
+} */
 
-footer small {
+/* footer small {
     height: 130px;
-}
+} */
 
 .social-image {
     width: 40px;
@@ -463,21 +550,32 @@ footer small {
 .hide {
     opacity: 0;
 }
+.user-controller-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: black;
+    height: 200px;
+    border-radius: 1rem;
+    padding: 8px;
+    gap: 8px;
+}
 
+nav {
+    box-shadow: 0 0 3px 0px;
+    background: linear-gradient( 40deg, #ffffffc7, #b1b1b1ab);
+}
+nav h3 {
+    text-align: center;
+}
 @media screen and (min-width:950px) {
-    nav {
-        box-shadow: 0 0 3px 0px;
-        background: linear-gradient( 40deg, #ffffffc7, #b1b1b1ab);
-    }
-    .main-nav {
-        margin: 0 auto 40px;
+    /* .main-nav {
         position: unset;
         max-width: 95%;
-        margin-bottom: 25px;
         border-radius: 2rem;
         background-color: unset;
         padding: 0 20px;
-    }
+    } */
     .btn-menu {
         display: none;
     }
@@ -493,10 +591,8 @@ footer small {
         justify-content: flex-end;
     }
     .link-container a {
-        font-family: fantasy;
-        font-size: 2rem;
-        text-shadow: 1px 0 4px #090313;
-        color: floralwhite;
+        font-size: 1rem;
+        color: #242223;
         transition: color .5s;
     }
     .link-container a:hover {
@@ -519,20 +615,23 @@ footer small {
         flex-direction: row;
         justify-content: space-around;
         max-width: 900px;
-        margin: 75px auto 0;
+        margin: 40px auto ;
     }
     .user-controller-container {
         display: flex;
         flex-direction: column;
-        padding: 59px 10px;
         justify-content: center;
         border: 2px solid floralwhite;
         border-radius: 2rem;
         background-color: #090975ad;
-        ;
+        background-image: url(../img/background-2.png);
+        gap: 8px;
         flex-wrap: wrap;
         box-shadow: 0 0px 1px 1px #828488;
+        height: 380px;
+        justify-content: center;
     }
+
     .user-controller-container h4 {
         color: white;
         text-align: center;
@@ -543,9 +642,8 @@ footer small {
         position: unset;
         margin-bottom: 8px;
         flex-wrap: wrap;
-        background: linear-gradient( 40deg, #ffffffc7, #b1b1b1ab);
         padding: 0px 0 8px;
-        box-shadow: 0 1px 1px 0px #090313;
+        background-color: #1f1e1f;
     }
     .second-user-controller {
         position: unset;
@@ -558,7 +656,7 @@ footer small {
         height: 40px;
         order: -2;
         margin-bottom: 8px;
-        text-align: center;
+        text-align: start;
         margin-bottom: 18px;
     }
     .generator-container .btn {
@@ -566,12 +664,14 @@ footer small {
         height: 35px;
     }
     .third-user-controller .btn {
-        background: #3498db;
-        border-radius: 28px;
-        padding: 10px 20px 10px 20px;
         width: unset;
         height: unset;
+        padding: 10px 25px;
     }
+}
+.share-container{
+    margin: 0;
+    margin-right: 5px;
 }
 
 @media screen and (min-width:1100px) {
@@ -582,16 +682,35 @@ footer small {
         font-size: 4.5rem;
     }
 }
+@media screen and (max-width:930px) {
+    .user-controller-container{
+        margin-bottom: 8px;
+    }
+}
 
 @media screen and (max-width:575px) {
+    .tag-container a{
+        padding: 5px 13px ;
+    }
     .canvas-container {
         max-width: 75vw;
     }
     .main-user-controller {
         max-width: 49vh;
+        margin-top: 28px;
+    }
+    .user-controller-container{
+        position: relative;
+        height: 220px;
     }
     .add-txt-input {
-        width: 30%;
+        position: absolute;
+        top: 3px;
+        right: 0;
+        left: 0;
+        width: 80%;
+        margin: 0 auto;
+        padding: 5px;
     }
     .top-nav {
         padding: 65px 0px;
@@ -609,6 +728,10 @@ footer small {
     .main-header h2 {
         padding-bottom: 60px;
     }
+}
+.container{
+    margin: 0 auto;
+    max-width:95%;
 }
 
 @media screen and(max-width:400px) {

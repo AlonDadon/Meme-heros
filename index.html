@@ -15,85 +15,89 @@
 
     <div class="main-screen" onclick="toggleMenu()"></div>
 
-    <nav>
-        <div class="main-nav flex space-between container">
+    <nav id="haeder-nav" class="main-nav-container">
+        <div class="main-nav flex space-between container ">
             <a onclick="onShowGallery()" class="logo font-large" href="#">Meme heroes</a>
             <ul class="link-container flex space-evenly column color-light font-large">
                 <li>
                     <a href="#" onclick="onShowGallery()">🎨Gallery</a>
                 </li>
                 <li>
-                    <a href="#">🎴Memes</a>
+                    <a href="#" onclick="onShowGallery()" >🎴Memes</a>
+                    <!-- <a href="#"  >🎴Memes</a> -->
                 </li>
                 <li>
-                    <a href="#">📄About</a>
+                    <a href="#" onclick="onShowGallery()" >📄About</a>
                 </li>
             </ul>
             <button class="btn-menu font-med" onclick="toggleMenu()">☰</button>
         </div>
     </nav>
 
-    <header class="main-header container flex column color-light">
-        <h1 class="color-dark">Meme heroes generator</h1>
-        <h2>Create your own hero card</h2>
-        <a  href="#top-nav" class="btn-call-to-action">Choose a hero</a>
+    <header class="main-header color-light ">
+        <div class="flex column">
+            <h1 class="color-dark">Meme heroes generator</h1>
+            <h2>Create your own hero card</h2>
+            <a href="#top-nav" class="btn-call-to-action">Choose a hero</a>
+        </div>
     </header>
 
-<nav id="top-nav" class="top-nav flex column color-light  ">
-    <h3 class="font-extra-large" >The most popular</h3>
-    <input  type="search" name="search-by-tag" oninput="onSetImgFilter(this.value)" placeholder="Write a tag to find a hero">
-    <ul class="tag-container font-med flex space-evenly color-dark">
-        <li>
-            <a onclick=" onSetImgFilter('funny')">Funny</a>
-        </li>
-        <li>
-            <a  onclick=" onSetImgFilter('love')" >Love</a>
-        </li>
-        <li>
-            <a onclick=" onSetImgFilter('action')" >Action</a>
-        </li>
-        <li>
-            <a onclick=" onSetImgFilter('dark')" >Dark</a>
-        </li>
-        <li>
-            <a>More...</a>
-        </li>
-    </ul>
-</nav>
+    <nav id="top-nav" class="top-nav flex column color-light">
+        <h3 class="font-extra-large ">The most popular</h3>
+        <input type="search" name="search-by-tag" oninput="onSetImgFilter(this.value)"
+            placeholder="Write a tag to find a hero">
+        <ul class="tag-container font-med flex space-evenly color-dark">
+            <li>
+                <a onclick=" onSetImgFilter('funny')">Funny</a>
+            </li>
+            <li>
+                <a onclick=" onSetImgFilter('love')">Love</a>
+            </li>
+            <li>
+                <a onclick=" onSetImgFilter('action')">Action</a>
+            </li>
+            <li>
+                <a onclick=" onSetImgFilter('dark')">Dark</a>
+            </li>
+            <li>
+                <a>More...</a>
+            </li>
+        </ul>
+    </nav>
 
-    <main class="main-container container">
-        <section  class="gallery-container">
+    <main class="main-container container ">
+        <section class="gallery-container ">
         </section>
-        
+
         <div class="flex flex-center">
             <button class="btn-load-img btn-call-to-action" onclick="onShowMoreImgs()">Load more</button>
         </div>
-        
+
         <section class="generator-container flex flex-center column hidden">
             <section class="canvas-container">
                 <canvas id="canvas" width="400" height="400"></canvas>
             </section>
 
             <section class="user-controller-container">
-                <h4 class="hidden">Controller</h4>
 
-                <div class="main-user-controller flex space-evenly font-small">
-                    <button class="btn btn-add-line " onclick="onAddLine()"></button>
-                    <button class="btn btn-remove-line " onclick="onRemoveLine()"></button>
-                    <button class="btn btn-swicth-line" onclick="onSwitchLine()"></button>
-                    <input class="add-txt-input" placeholder="Add text" name="addTxt" oninput="onAddTxt(this.value)" type="text">
-                    <label class="btn update-fill ">
+                <div class="main-user-controller container flex space-evenly font-small">
+                    <button class="btn-icon btn-add-line " onclick="onAddLine()"></button>
+                    <button class="btn-icon btn-remove-line " onclick="onRemoveLine()"></button>
+                    <button class="btn-icon btn-swicth-line" onclick="onSwitchLine()"></button>
+                    <input class="add-txt-input" placeholder="Add text" name="addTxt" oninput="onAddTxt(this.value)"
+                        type="text">
+                    <label class="btn-icon update-fill ">
                         <input class="hide color-input" oninput="onUpdateFill(this.value)" type="color">
                     </label>
-                    <label class="btn update-stroke ">
+                    <label class="btn-icon update-stroke ">
                         <input class="hide color-input" oninput="onUpdateStroke(this.value)" type="color">
                     </label>
-                    <button class="btn btn-align-left btn" onclick="onUpdateTxtAlign('left')"></button>
-                    <button class="btn btn-align-center" onclick="onUpdateTxtAlign('center')"></button>
-                    <button class="btn btn-align-right " onclick="onUpdateTxtAlign('right')"></button>
+                    <button class="btn-icon btn-align-left " onclick="onUpdateTxtAlign('left')"></button>
+                    <button class="btn-icon btn-align-center" onclick="onUpdateTxtAlign('center')"></button>
+                    <button class="btn-icon btn-align-right " onclick="onUpdateTxtAlign('right')"></button>
                 </div>
 
-                <div class="second-user-controller flex space-evenly font-small">
+                <div class="second-user-controller container flex space-evenly font-small">
                     <!-- <button class="btn-move-up btn-move" onclick="onMoveLine(-1)"></button>
                             <button class="btn-move-down btn-move" onclick="onMoveLine(1)"></button> -->
                     <label class="update-font-size">Font size: <span class="font-size"></span>
@@ -108,14 +112,15 @@
                     </select>
                 </div>
 
-                <div class="third-user-controller  flex column align-center">
+                <div class="third-user-controller  flex  align-center">
+                  
                     <form method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                         <input name="img" id="imgData" type="hidden" />
-                        <button class="btn" type="submit">Publish</button>
-                        <a href="#" class="btn" onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
+                        <button class="btn btn-blue" type="submit">Publish</button>
+                        <a href="#" class="btn btn-red" onclick="onDownloadImg(this)" download="my-img.jpg">Download</a>
                         <div class="share-container flex"></div>
                     </form>
-                    <label class="btn">Upload image
+                    <label class="btn btn-outline">Upload image
                         <input class="hidden" type="file" class="file-input " name="image" onchange="onImgInput(event)">
                     </label>
                 </div>
@@ -123,11 +128,15 @@
         </section>
     </main>
 
-    <footer class="footer-container flex flex-center align-center column bg-dark color-light">
-        <a class="logo font-large" href="#">Meme heroes</a>
-        <small class="flex align-center">&copy; A.D.A 2021 - All Rights Reserved </small>
+    <footer class="footer-container   bg-dark color-light">
+
+        <div class="container flex flex-center align-center column">
+            <a class="logo font-large" href="#">Meme heroes</a>
+            <small class="flex align-center">&copy; A.D.A 2021 - All Rights Reserved </small>
+
+        </div>
     </footer>
-  
+
 
     <script src="js/util-service.js"></script>
     <script src="js/upload-service.js"></script>

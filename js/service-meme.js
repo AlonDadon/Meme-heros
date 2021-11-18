@@ -71,7 +71,7 @@ function switchLine(idx) {
 function createLine() {
     let line = {
         txt: 'Add text',
-        size: 50,
+        fontSize: 50,
         align: 'left',
         strokeColor: 'black',
         fillColor: 'white',
@@ -141,7 +141,7 @@ function updateImg(id) {
 
 function updateFontSize(fontSize) {
     const idx = gMeme.selectedLineIdx
-    gMeme.lines[idx].size = fontSize
+    gMeme.lines[idx].fontSize = fontSize
 }
 
 function updateLinePosY(diff) {

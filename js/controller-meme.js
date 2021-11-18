@@ -14,8 +14,9 @@ function onInit() {
 
 function renderGallery(imgs) {
     const strHtml = imgs.map((img) => {
-        return `  
-        <img data-id="${img.id}"onclick="onUpdateImg(this)"  src="${img.src}" alt="">`
+        return ` 
+        <img data-id="${img.id}"onclick="onUpdateImg(this)"  src="${img.src}" alt="">
+        `
     })
     getEl('.gallery-container').innerHTML = strHtml.join('')
 }
@@ -25,7 +26,7 @@ function renderCanvas() {
     const idx = meme.selectedLineIdx
     const userImg = getUserImg()
     if (meme.lines[idx]) {
-        renderUserController(meme.lines[idx].txt, meme.lines[idx].size)
+        renderUserController(meme.lines[idx].txt, meme.lines[idx].fontSize)
     }
     let img = new Image()
     img.src = `img/${meme.selectedImgId}.jpg`;
@@ -33,7 +34,7 @@ function renderCanvas() {
         if (userImg) img = userImg
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height,);
         meme.lines.forEach(function (line) {
-            drawTxt(line, meme.fontFamily)
+            drawTxt({ ...line, fontFamily: meme.fontFamily })
         })
     }
 }
@@ -44,7 +45,8 @@ function renderUserController(txt, fontSize) {
     renderFontSize(fontSize)
 }
 
-function drawTxt({ txt, pos, fontSize, color, txtAlign, fillColor }, fontFamily) {
+function drawTxt({ txt, pos, fontSize, color, txtAlign, fillColor,fontFamily } ) {
+    // console.log('drawtxt-',fontSize);
     gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = color
@@ -56,6 +58,7 @@ function drawTxt({ txt, pos, fontSize, color, txtAlign, fillColor }, fontFamily)
 }
 
 function onUpdateImg(elImg) {
+    window.scroll(0, 0)
     getEl('.btn-load-img').style.display = 'none'
     getEl('.gallery-container').classList.add('hidden')
     getEl('.top-nav').classList.add('hidden')
@@ -82,6 +85,7 @@ function onUpdateFontSize(fontSize) {
 }
 
 function renderFontSize(fontSize) {
+    console.log(fontSize);
     getEl('.font-size').innerText = fontSize
 }
 
@@ -170,7 +174,7 @@ function onMove(ev) {
 
 function onUp() {
     updateIsDragging(false)
-   gElCanvas.style.cursor = 'auto'
+    gElCanvas.style.cursor = 'auto'
 }
 
 // function onLeave() {
